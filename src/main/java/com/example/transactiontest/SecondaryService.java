@@ -62,5 +62,12 @@ public class SecondaryService {
         record.setName("Never Transaction");
         recordRepository.save(record);
     }
+
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void mandatoryTransaction() {
+        Record record = new Record();
+        record.setName("Mandatory Transaction");
+        recordRepository.save(record);
+    }
 }
 

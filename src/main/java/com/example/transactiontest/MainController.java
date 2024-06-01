@@ -66,5 +66,16 @@ public class MainController {
         return "Executed with NEVER without Transaction";
     }
 
+    @GetMapping("/testMandatoryWithTransaction")
+    public String testMandatoryWithTransaction() {
+        mainService.executeWithMandatoryTransaction();
+        return "Executed with MANDATORY in Transaction";
+    }
+
+    @GetMapping("/testMandatoryNoTransaction")
+    public String testMandatoryNoTransaction() {
+        mainService.executeWithoutMandatoryTransaction();
+        return "Executed with MANDATORY without Transaction";
+    }
 }
 

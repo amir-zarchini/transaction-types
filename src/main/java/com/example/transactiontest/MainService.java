@@ -123,4 +123,28 @@ public class MainService {
 
         secondaryService.neverTransaction();
     }
+
+
+    @Transactional
+    public void executeWithMandatoryTransaction() {
+        Record record = new Record();
+        record.setName("Main Transaction - Mandatory Transaction");
+        recordRepository.save(record);
+
+        secondaryService.mandatoryTransaction();
+
+        // Further processing or DB operations
+    }
+
+    public void executeWithoutMandatoryTransaction() {
+        Record record = new Record();
+        record.setName("Non-Transactional Call - Mandatory Transaction");
+        recordRepository.save(record);
+
+        try {
+            secondaryService.mandatoryTransaction();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
 }
