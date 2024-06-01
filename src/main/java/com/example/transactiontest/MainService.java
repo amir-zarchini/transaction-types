@@ -74,7 +74,7 @@ public class MainService {
         // Further processing or DB operations
     }
 
-    public void executeWithoutTransaction() {
+    public void executeWithoutTransactionSupports() {
         Record record = new Record();
         record.setName("Non-Transactional Call - Supports Transaction");
         recordRepository.save(record);
@@ -83,7 +83,7 @@ public class MainService {
     }
 
     @Transactional
-    public void executeWithTransaction() {
+    public void executeWithNotSupported() {
         Record record = new Record();
         record.setName("Main Transaction - non Support Transaction");
         recordRepository.save(record);
@@ -101,5 +101,26 @@ public class MainService {
         secondaryService.notSupportedTransaction();
 
         // Further processing or DB operations
+    }
+
+    @Transactional
+    public void executeWithNever() {
+        Record record = new Record();
+        record.setName("Main Transaction - Never Transaction");
+        recordRepository.save(record);
+
+        try {
+            secondaryService.neverTransaction();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    public void executeWithoutNever() {
+        Record record = new Record();
+        record.setName("Non-Transactional Call - Never Transaction");
+        recordRepository.save(record);
+
+        secondaryService.neverTransaction();
     }
 }

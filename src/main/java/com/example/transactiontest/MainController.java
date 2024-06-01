@@ -38,13 +38,13 @@ public class MainController {
 
     @GetMapping("/testSupportsNoTransaction")
     public String testSupportsNoTransaction() {
-        mainService.executeWithoutTransaction();
+        mainService.executeWithoutTransactionSupports();
         return "Executed with SUPPORTS without Transaction";
     }
 
     @GetMapping("/testNotSupportedWithTransaction")
     public String testNotSupportedWithTransaction() {
-        mainService.executeWithTransaction();
+        mainService.executeWithNotSupported();
         return "Executed with NOT_SUPPORTED in Transaction";
     }
 
@@ -53,5 +53,18 @@ public class MainController {
         mainService.executeWithoutTransactionNonSupported();
         return "Executed with NOT_SUPPORTED without Transaction";
     }
+
+    @GetMapping("/testNeverWithTransaction")
+    public String testNeverWithTransaction() {
+        mainService.executeWithNever();
+        return "Executed with NEVER in Transaction";
+    }
+
+    @GetMapping("/testNeverNoTransaction")
+    public String testNeverNoTransaction() {
+        mainService.executeWithoutNever();
+        return "Executed with NEVER without Transaction";
+    }
+
 }
 
