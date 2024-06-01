@@ -58,7 +58,7 @@ public class MainController {
     // --------------------------------------- SUPPORTS Transaction ------------------------------------------------
     /*
     1) With Existing Transaction:
-       . When you call mainService.executeWithTransaction(), it starts a transaction because of the @Transactional annotation.
+       . When you call mainService.executeWithSupports(), it starts a transaction because of the @Transactional annotation.
        . The secondaryService.supportsTransaction() method joins this existing transaction.
        . Both "Main Transaction" and "Supports Transaction" records are saved as part of the same transaction.
      */
@@ -70,7 +70,8 @@ public class MainController {
 
     /*
     2) Without Existing Transaction:
-       . When you call mainService.executeWithoutTransaction(), it does not start a transaction because there is no @Transactional annotation.
+       . When you call mainService.executeWithoutTransactionSupports(),
+            it does not start a transaction because there is no @Transactional annotation.
        . The secondaryService.supportsTransaction() method runs non-transactionally.
        . Both "Non-Transactional Call" and "Supports Transaction" records are saved independently
      */
@@ -86,7 +87,7 @@ public class MainController {
     // --------------------------------------- NOT_SUPPORTED Transaction ---------------------------------------------
     /*
     1) With Existing Transaction:
-       . When you call mainService.executeWithTransaction(), it starts a transaction because of the @Transactional annotation.
+       . When you call mainService.executeWithNotSupported(), it starts a transaction because of the @Transactional annotation.
        . The secondaryService.notSupportedTransaction() method suspends the current transaction and runs non-transactionally.
        . After notSupportedTransaction completes, the main transaction resumes.
        . Both "Main Transaction" and "Not Supported Transaction" records are saved independently.
@@ -99,7 +100,8 @@ public class MainController {
 
     /*
     2) Without Existing Transaction:
-       . When you call mainService.executeWithoutTransaction(), it does not start a transaction because there is no @Transactional annotation.
+       . When you call mainService.executeWithoutTransactionNonSupported(),
+            it does not start a transaction because there is no @Transactional annotation.
        . The secondaryService.notSupportedTransaction() method runs non-transactionally as there is no transaction to suspend.
        . Both "Non-Transactional Call" and "Not Supported Transaction" records are saved independently
      */
@@ -115,7 +117,7 @@ public class MainController {
     // ------------------------------------------ NEVER Transaction ----------------------------------------------
     /*
     1) With Existing Transaction:
-       . When you call mainService.executeWithTransaction(), it starts a transaction because of the @Transactional annotation.
+       . When you call mainService.executeWithNever(), it starts a transaction because of the @Transactional annotation.
        . The secondaryService.neverTransaction() method throws an exception because it must not be executed within a transaction.
        . The exception is caught, and the message is printed.
        . Only "Main Transaction" is saved because neverTransaction did not execute successfully.
@@ -128,7 +130,7 @@ public class MainController {
 
     /*
     2)Without Existing Transaction:
-       . When you call mainService.executeWithoutTransaction(), it does not start a transaction because there is no @Transactional annotation.
+       . When you call mainService.executeWithoutNever(), it does not start a transaction because there is no @Transactional annotation.
        . The secondaryService.neverTransaction() method runs normally as there is no transaction.
        . Both "Non-Transactional Call" and "Never Transaction" records are saved.
      */
@@ -144,7 +146,8 @@ public class MainController {
     //------------------------------------------ MANDATORY Transaction ----------------------------------------------
     /*
     1) With Existing Transaction:
-        . When you call mainService.executeWithTransaction(), it starts a transaction because of the @Transactional annotation.
+        . When you call mainService.executeWithMandatoryTransaction(),
+            it starts a transaction because of the @Transactional annotation.
         . The secondaryService.mandatoryTransaction() method joins this existing transaction.
         . Both "Main Transaction" and "Mandatory Transaction" records are saved as part of the same transaction.
      */
@@ -156,7 +159,8 @@ public class MainController {
 
     /*
     2) Without Existing Transaction:
-        . When you call mainService.executeWithoutTransaction(), it does not start a transaction because there is no @Transactional annotation.
+        . When you call mainService.executeWithoutMandatoryTransaction(),
+            it does not start a transaction because there is no @Transactional annotation.
         . The secondaryService.mandatoryTransaction() method throws an exception because there is no existing transaction.
         . The exception is caught, and the message is printed.
         . Only "Non-Transactional Call" is saved because mandatoryTransaction did not execute successfully.
