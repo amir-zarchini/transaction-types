@@ -41,5 +41,17 @@ public class MainController {
         mainService.executeWithoutTransaction();
         return "Executed with SUPPORTS without Transaction";
     }
+
+    @GetMapping("/testNotSupportedWithTransaction")
+    public String testNotSupportedWithTransaction() {
+        mainService.executeWithTransaction();
+        return "Executed with NOT_SUPPORTED in Transaction";
+    }
+
+    @GetMapping("/testNotSupportedNoTransaction")
+    public String testNotSupportedNoTransaction() {
+        mainService.executeWithoutTransactionNonSupported();
+        return "Executed with NOT_SUPPORTED without Transaction";
+    }
 }
 

@@ -47,5 +47,13 @@ public class SecondaryService {
         recordRepository.save(record);
         throw new RuntimeException("Exception in Supports Transaction");
     }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void notSupportedTransaction() {
+        Record record = new Record();
+        record.setName("Not Supported Transaction");
+        recordRepository.save(record);
+        throw new RuntimeException("Exception in Not Supported Transaction");
+    }
 }
 

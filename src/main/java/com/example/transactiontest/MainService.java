@@ -81,4 +81,25 @@ public class MainService {
 
         secondaryService.supportsTransaction();
     }
+
+    @Transactional
+    public void executeWithTransaction() {
+        Record record = new Record();
+        record.setName("Main Transaction - non Support Transaction");
+        recordRepository.save(record);
+
+        secondaryService.notSupportedTransaction();
+
+        // Further processing or DB operations
+    }
+
+    public void executeWithoutTransactionNonSupported() {
+        Record record = new Record();
+        record.setName("Non-Transactional Call - non Support Transaction");
+        recordRepository.save(record);
+
+        secondaryService.notSupportedTransaction();
+
+        // Further processing or DB operations
+    }
 }
